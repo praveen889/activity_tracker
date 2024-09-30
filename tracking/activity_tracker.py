@@ -27,7 +27,8 @@ class ActivityTracker:
         with mouse.Listener(on_move=self.on_move) as mouse_listener, \
              keyboard.Listener(on_press=self.on_key_press) as key_listener:
             while self.is_tracking:
-                time.sleep(20)  # Capture every second
+                 # Capture every 20 second
+                time.sleep(20) 
             mouse_listener.stop()
             key_listener.stop()
 
@@ -65,7 +66,8 @@ class ScreenshotManager:
             screenshot_path = self.take_screenshot()
             self.log_callback(screenshot_path=screenshot_path)
             self.upload_callback(screenshot_path)
-            time.sleep(60)  # Capture screenshot every 60 seconds
+            # Capture screenshot every 5 minutes
+            time.sleep(300)  
 
     def take_screenshot(self):
         screenshot_dir = 'screenshots'
