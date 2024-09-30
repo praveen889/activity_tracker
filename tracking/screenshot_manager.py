@@ -31,7 +31,7 @@ class ScreenshotManager:
     def stop_capturing(self):
         if self.active:
             print("Stopping screenshot capturing...")
-            self.active = False  # Set active to False
+            self.active = False 
             print("Screenshot capturing stopped.")
         else:
             print("Screenshot capturing was not active.")
