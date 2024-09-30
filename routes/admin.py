@@ -56,15 +56,6 @@ def admin_logout():
 
 @admin_bp.route('/admin_dashboard')
 def admin_dashboard():
-    # # Fetch user activity data from the database
-    # conn = get_db_connection()
-    # # Fetch all users (assuming `users` table contains `username` and `email`)
-    # users = conn.execute('SELECT id, username, email FROM users').fetchall()
-    # conn.close()
-
-    # # Render the admin dashboard with users' data
-    # return render_template('admin_dashboard.html', users=users)
-
     # Check if the admin user is logged in
     if not session.get('admin_logged_in'):
         flash('You need to log in as an admin to access the dashboard.', 'danger')
