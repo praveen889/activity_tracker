@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body{
+            background: #C1BEFF;
+        }
+        .form{
+            border: 1px solid #fff;
+            margin-top: 15%;
+            width: 35%;
+            background: #fff;
+            border-radius: 5px;
+            margin-left: 32.5%;
+            display: flex;
+            height: 50vh;
+            font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+        }
+        .left{
+            width: 50%;
+            background-image: linear-gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)),url('../static/images/login-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            color: #fff;
+            padding-top: 8%;
+        }
+        .left-heading{
+            margin-left: 10%;
+            margin-right: 7%;
+            font-size: 40px;
+        }
+        .left-para{
+            margin-left: 10%;
+            margin-right: 7%;
+            padding-top: 8%;
+        }
+        .right{
+            margin-left: 7%;
+            margin-right: 7%;
+            margin-top: 10%;
+        }
+        .btn{
+            margin-top: 20%;
+        }
+        .main-btn{
+            margin-top: 5%;
+            height: 35px;
+            width: 120px;
+            background: #938eef;
+            border: none;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .right-h{
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form">
+        <div class="left">
+            <h1 class='left-heading'>Welcome..!</h1>
+            <p class="left-para">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero cum,
+              alias totam numquam ipsa exercitationem dignissimos, error nam,
+              consequatur.
+            </p>
+        </div>
+        <div class="right">
+            <h1 class="right-h">Login as</h1>
+            <div class="btn">
+                <a href="{{ url_for('user_bp.login') }}">
+                    <button class="main-btn">User</button>
+                </a>
+                <a href="{{ url_for('admin_bp.admin_login') }}">
+                    <button class="main-btn">Admin</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

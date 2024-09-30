@@ -1,0 +1,156 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+</head>
+<body>
+    <h2>Admin Login</h2>
+    <form method="POST" action="{{ url_for('admin_bp.admin_login') }}">
+        <label for="email">Email:</label>
+        <input type="email" name="email" required>
+        <label for="password">Password:</label>
+        <input type="password" name="password" required>
+        <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="{{ url_for('admin_bp.admin_signup') }}">Sign up here</a>.</p>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <style>
+        body{
+            background: #C1BEFF;
+        }
+        .form{
+            border: 1px solid #fff;
+            margin-top: 12%;
+            width: 35%;
+            background: #fff;
+            border-radius: 5px;
+            margin-left: 32.5%;
+            display: flex;
+            height: 50vh;
+            font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+        }
+        .left{
+            width: 50%;
+            background-image: linear-gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)),url('../static/images/login-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            color: #fff;
+            padding-top: 8%;
+        }
+        .left-heading{
+            margin-left: 10%;
+            margin-right: 7%;
+            font-size: 40px;
+            margin-top: 0; 
+        }
+        .left-para{
+            padding-top: 8%;
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+        .right{
+            margin-top: 10%;
+            width: 50%;
+        }
+        .btn{
+            margin-top: 20%;
+        }
+        .main-btn{
+            margin-top: 5%;
+            height: 35px;
+            width: 120px;
+            background: #938eef;
+            border: none;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .register-button{
+            margin-top: 5%;
+            height: 35px;
+            width: 150px;
+            border: none;
+            color: rebeccapurple;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .last-sec{
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+        .right-heading{
+            margin-left: 10%;
+            margin-right: 10%;
+            font-size: 30px;
+        }
+        .email-input{
+            margin-left: 10%;
+            margin-right: 10%;
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            margin-top: 10%;
+            padding-left: 3%;
+            padding-bottom: 3%;
+            border-bottom: 1px solid gray;
+        }
+        .password-input{
+            margin-left: 10%;
+            margin-right: 10%;
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            margin-top: 10%;
+            padding-left: 3%;
+            padding-bottom: 3%;
+            border-bottom: 1px solid gray;
+        }
+        .btn{
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+    </style>
+</head>
+<body>
+    <div class="form">
+        <div class="left">
+            <h1 class='left-heading'>Welcome back Admin..!</h1>
+            <p class="left-para">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero cum,
+              alias totam numquam ipsa exercitationem dignissimos, error nam,
+              consequatur.
+            </p>
+            <div class="last-sec">
+                <p>Don't have an account?</p>
+                <a href="{{ url_for('admin_bp.admin_signup') }}">
+                    <button class="register-button">Signup</button>
+                </a>
+            </div>
+            
+        </div>
+        <div class="right">
+            <h2 class="right-heading">Login as Admin</h2>
+            <form method="POST" action="{{ url_for('admin_bp.admin_login')}}">
+                <input class="email-input" type="email" placeholder="Email" id="email" name="email" required>
+                <input class="password-input" type="password" placeholder="Password" id="password" name="password" required>
+                <div class="btn">
+                    <button class="main-btn" type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

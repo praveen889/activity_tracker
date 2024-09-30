@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            background: #C1BEFF;
+        }
+        .Dashboard {
+            height: 50vh;
+            width: 40%;
+            margin-left: 30%;
+            margin-top: 25vh;
+            background: #fff;
+            border-radius: 5px;
+            font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .dashboard-h{
+            margin-top: 10%;
+        }
+        .dash-btn {
+            margin-top: 10%;
+            height: 35px;
+            width: 120px;
+            background: #938eef;
+            border: none;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        #status-message {
+            margin-top: 15px;
+            font-size: 14px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <form class="Dashboard">
+        <h1 class="dashboard-h">Welcome, {{ username }}</h1>
+
+        <button type="button" class="dash-btn" id="start-day-button">Start Your Day</button>
+        <button type="button" class="dash-btn" id="stop-day-button">Stop Your Day</button>
+
+        <div id="status-message"></div>
+    </form>
+
+    <script>
+        // Get the elements
+        const statusMessage = document.getElementById("status-message");
+
+        document.getElementById("start-day-button").addEventListener("click", function() {
+            fetch('/start-day', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    statusMessage.textContent = 'Tracking Started!';
+                    statusMessage.style.color = 'green';
+                } else {
+                    statusMessage.textContent = 'Error starting tracking!';
+                    statusMessage.style.color = 'red';
+                }
+            });
+        });
+
+        document.getElementById("start-day-button").addEventListener("click", function() {
+            statusMessage.textContent = 'Tracking Started!';
+            statusMessage.style.color = 'green';
+        });
+
+        document.getElementById("stop-day-button").addEventListener("click", function() {
+            statusMessage.textContent = 'Tracking Stopped!';
+            statusMessage.style.color = 'green';
+        });
+    </script>
+</body>
+</html>

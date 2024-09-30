@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body{
+            font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background: #C1BEFF;
+        }
+        .dashboard-admin{
+            background: #fff;
+            width: 60%;
+            margin-top: 5%;
+            text-align: center;
+            border-radius: 10px;
+            padding-top: 2%;
+            padding-bottom: 2%;
+            margin-left: 20%;
+         }
+         .col-1{
+            width: 33%;
+            height: 40px;
+         }
+         .col-2{
+            width: 33%;
+            height: 40px;
+        }
+        .col-3{
+            width: 33%;
+            height: 40px;
+        }
+        .table-a{
+            width: 100%;
+        }
+        .action-btn{
+            margin-top: 5%;
+            height: 35px;
+            width: 120px;
+            background: #938eef;
+            border: none;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-admin">
+        <h1 class="h-a">Admin Dashboard</h1>
+        <h2>All Users</h2>
+        <table class="table-a">
+            <thead>
+                <tr>
+                    <th class="col-1">Username</th>
+                    <th class="col-2">Email</th>
+                    <th class="col-3">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td class="col-1">{{ user['username'] }}</td>
+                    <td class="col-2">{{ user['email'] }}</td>
+                    <td class="col-3">
+                        <form action="{{ url_for('admin_bp.view_user_activity', user_id=user['id']) }}" method="GET">
+                            <button class="action-btn"type="submit">View Activity</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

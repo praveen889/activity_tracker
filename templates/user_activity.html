@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Activity</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>User Activity for User ID {{ user_id }}</h1>
+<h2>Total Active Time: {{ active_time }} seconds</h2>
+<h2>Total Inactive Time: {{ inactive_time }} seconds</h2>
+
+<canvas id="activityChart" width="200" height="100"></canvas>
+
+<script>
+    const ctx = document.getElementById('activityChart').getContext('2d');
+    const activityChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Active Time', 'Inactive Time'],
+            datasets: [{
+                label: 'Time (seconds)',
+                data: [{{ active_time }}, {{ inactive_time }}],
+                backgroundColor: ['#4CAF50', '#FF6384'],
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+<div class="screenshot-div">
+    <h2>Screenshots</h2>
+    <div class="screenshot" id="screenshots">
+        {% for screenshot in screenshots %}
+            <img src="{{ url_for('static', filename='screenshots/' ~ screenshot) }}" alt="Screenshot" style="width: 200px; height: auto; margin-right: 10px;">
+        {% endfor %}
+    </div>
+</div>
+</body>
+</html>
