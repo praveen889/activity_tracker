@@ -17,9 +17,8 @@ screenshot_manager_instance = None
 def dashboard():
     """Render the dashboard page for the logged-in user."""
     if 'user_id' in session:
-        return render_template('dashboard.html')  # Render the dashboard for logged-in user
-    return redirect(url_for('auth.login'))  # Redirect to login if user is not authenticated
-
+        return render_template('dashboard.html') 
+    return redirect(url_for('auth.login'))
 
 @user_bp.route('/start-day', methods=['POST'])
 def start_day():
@@ -34,10 +33,11 @@ def start_day():
                          (user_id, mouse_activity, keyboard_activity, screenshot_path))
             conn.commit()
             conn.close()
-            upload_db_to_s3()  # Sync the updated database to S3
+            upload_db_to_s3()  
 
         def upload_to_s3(screenshot_path):
             # Logic to upload screenshots to S3 can be added here if needed
+            #Currently Screenshot is saved in Screenshot folder of this project
             pass
 
         # Create instances of trackers
@@ -82,9 +82,8 @@ def stop_day():
 @user_bp.route('/logout')
 def logout():
     """Log the user out and clear the session."""
-    session.clear()  # Clear all session data
-    return redirect(url_for('auth.login'))  # Redirect to the login page after logging out
-
+    session.clear()  
+    return redirect(url_for('auth.login'))  
 # Route to handle user login (assuming there's a form with 'username' and 'password')
 @user_bp.route('/login', methods=['GET', 'POST'])
 def login():
@@ -93,7 +92,7 @@ def login():
         username = request.form['username']
         password = request.form['password']
 
-        # Validate the login credentials (assuming there's a users table with username and password)
+        # Validate the login credentials
         conn = get_db_connection()
         user = conn.execute('SELECT * FROM users WHERE username = ? AND password = ?', (username, password)).fetchone()
         conn.close()
@@ -104,9 +103,8 @@ def login():
             session['username'] = user['username']
 
             session['is_admin'] = user['is_admin']
-            return redirect(url_for('user_bp.dashboard'))  # Redirect to the dashboard after successful login
+            return redirect(url_for('user_bp.dashboard'))  
         else:
-            # Invalid credentials, return an error message or redirect
             return "Invalid credentials", 403
 
     return render_template('login.html')  # Render the login page for GET requests
@@ -117,10 +115,10 @@ def login():
 def admin_dashboard():
     """Render the admin dashboard with user activity logs."""
     if 'is_admin' not in session or not session['is_admin']:
-        return "Access denied", 403  # Ensure the user is an admin
+        return "Access denied", 403 
     
     conn = get_db_connection()
-    activities = conn.execute('SELECT * FROM activity_log ORDER BY timestamp DESC').fetchall()  # Fetch all activity logs
+    activities = conn.execute('SELECT * FROM activity_log ORDER BY timestamp DESC').fetchall()  
     conn.close()
     
     return render_template('admin_dashboard.html', activities=activities)
