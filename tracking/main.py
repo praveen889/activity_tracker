@@ -20,8 +20,8 @@ class EmployeeAgent:
 
     def stop(self):
         print(f"Stopping tracking for user: {self.username}")
-        self.activity_tracker.stop_tracking()  # Stop the activity tracker
-        self.screenshot_manager.stop_capturing()  # Stop the screenshot manager
+        self.activity_tracker.stop_tracking()  
+        self.screenshot_manager.stop_capturing() 
 
 
     def monitor_timezone_changes(self):
