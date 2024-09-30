@@ -7,15 +7,10 @@ auth_bp = Blueprint('auth_bp', __name__)
 
 active_agents = {}
 
-
-
-
 #homePage
 @auth_bp.route('/', methods=['GET', 'POST'])
 def home():
     return render_template('home.html')
-
-
 
 # Signup route
 @auth_bp.route('/signup', methods=['GET', 'POST'])
