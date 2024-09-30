@@ -8,7 +8,7 @@ import os
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = os.getenv('SECRET_KEY')  # Change to a more secure key in production
+app.secret_key = os.getenv('SECRET_KEY') 
 
 
 # Register blueprints for modular routes
