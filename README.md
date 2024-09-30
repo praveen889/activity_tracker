@@ -80,3 +80,31 @@ Role-Based Access: Implement more granular permissions for admins.
 
 #Conclusion
 This Employee Tracking Flask App provides a basic framework for tracking user activities with an admin review system. By using Flask, SQLite, and AWS S3, it ensures data persistence and ease of management for both users and administrators.
+
+
+File Structutre
+
+activity_tracker/
+├── routes/
+│   ├── admin.py   # Admin login/signup and dashboard routes
+│   ├── auth.py    # User login/signup routes
+│   ├── user.py    # User dashboard and activity routes
+├── templates/
+│   ├── admin_dashboard.html  # Admin dashboard
+│   ├── dashboard.html        # User dashboard
+│   ├── login.html            # User login page
+│   ├── signup.html           # User signup page
+│   ├── admin_login.html      # Admin login page
+│   ├── admin_signup.html     # Admin signup page
+│   └── user_activity.html    # Displays user activity and screenshots for admins
+├── screenshots/              # Folder for storing captured screenshots
+├── app.py                        # Main Flask application
+├── .env                          # Environment variables (AWS credentials, etc.)
+├── tracking/
+│   ├── activity_tracker.py       # Tracks mouse and keyboard activity
+│   ├── screenshot_manager.py     # Manages screenshot capturing
+│   └── timezone_manager.py       # Handles timezone management
+├── utils/
+│   └── s3_utils.py               # Syncs database with AWS S3
+└── local_database.db             # SQLite local database
+
