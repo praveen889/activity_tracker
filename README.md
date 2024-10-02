@@ -1,5 +1,12 @@
 # activity_tracker
 
+#########################################
+#                                       #
+#    Rename refrence for key as .env    #
+#                                       #
+#########################################                                      
+
+
 #Required Modules
 1. Flask: The web framework used for building the application.
 pip install Flask
