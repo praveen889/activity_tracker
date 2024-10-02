@@ -2,7 +2,7 @@
 
 #########################################
 #                                       #
-#    Rename refrence for key as .env    #
+#    Rename refrence_for_key as .env    #
 #                                       #
 #########################################                                      
 
