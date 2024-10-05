@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session
+from flask import Blueprint, render_template, request, redirect, url_for, session, jsonify
 from tracking.activity_tracker import ActivityTracker, ScreenshotManager 
 from utils.s3_utils import get_db_connection, upload_db_to_s3
 import time
@@ -19,7 +19,6 @@ def dashboard():
     if 'user_id' in session:
         return render_template('dashboard.html') 
     return redirect(url_for('auth.login'))
-
 @user_bp.route('/start-day', methods=['POST'])
 def start_day():
     global activity_tracker_instance, screenshot_manager_instance
@@ -33,11 +32,10 @@ def start_day():
                          (user_id, mouse_activity, keyboard_activity, screenshot_path))
             conn.commit()
             conn.close()
-            upload_db_to_s3()  
+            upload_db_to_s3()  # Sync the updated database to S3
 
         def upload_to_s3(screenshot_path):
             # Logic to upload screenshots to S3 can be added here if needed
-            #Currently Screenshot is saved in Screenshot folder of this project
             pass
 
         # Create instances of trackers
@@ -57,25 +55,28 @@ def start_day():
 
 @user_bp.route('/stop-day', methods=['POST'])
 def stop_day():
-    global activity_tracker_instance, screenshot_manager_instance
+    print("Stop day route called")  # Debug print
 
-    if 'is_tracking' in session and session['is_tracking']:
-        # Stop tracking using the instance
-        if activity_tracker_instance is not None:
-            activity_tracker_instance.stop_tracking()
-        
-        if screenshot_manager_instance is not None:
-            screenshot_manager_instance.stop_capturing()
+    if 'user_id' in session:
+            try:
+                global activity_tracker_instance, screenshot_manager_instance  # Ensure global variables are accessed
 
-        # Clear tracking flag from session
-        session.pop('is_tracking', None)
+                if screenshot_manager_instance is not None:  # Check if instance exists
+                    print("Stopping Screenshot Manager...")
+                    screenshot_manager_instance.stop_capturing()  # Stops the ScreenshotManager process
+                    print("Screenshot capturing stopped.")  # Confirm stopping
 
-        return redirect(url_for('user_bp.dashboard'))
+                if activity_tracker_instance is not None:  # Check if instance exists
+                    print("Stopping Activity Tracker...")
+                    activity_tracker_instance.stop_tracking()  # Stops the ActivityTracker process
+                    print("Activity tracking stopped.")  # Confirm stopping
 
-    print("Tracking was expected to be started, but session does not contain tracking instances.")
-    return "Tracking not started", 403
-
-
+                return jsonify({'success': True, 'message': 'Activity tracking and screenshot capturing stopped'}), 200
+            except Exception as e:
+                print(f"Error stopping activities: {str(e)}")  # Print the error for debugging
+                return jsonify({'success': False, 'message': str(e)}), 500
+    else:
+        return jsonify({'success': False, 'message': 'User not logged in'}), 401
 
 
 # Route to handle user logout
