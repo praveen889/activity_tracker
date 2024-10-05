@@ -64,6 +64,13 @@
             })
             .then(response => response.json())
             .then(data => {
+            if (data.success) {
+                alert('Tracking stopped!');
+            } else {
+                alert('Error stopping tracking: ' + data.message);
+            }
+            })
+            .then(data => {
                 if (data.success) {
                     statusMessage.textContent = 'Tracking Started!';
                     statusMessage.style.color = 'green';
@@ -79,10 +86,34 @@
             statusMessage.style.color = 'green';
         });
 
-        document.getElementById("stop-day-button").addEventListener("click", function() {
-            statusMessage.textContent = 'Tracking Stopped!';
+        document.getElementById("stop-day-button").addEventListener("click", function(event) {
+        event.preventDefault(); // Prevent form submission or page reload
+        fetch('/stop-day', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Display the "Tracking stopped" text
+                alert('Tracking stopped!');
+            } else {
+                alert('Error stopping tracking: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+        
+    });
+
+    document.getElementById("stop-day-button").addEventListener("click", function() {
+            statusMessage.textContent = 'Tracking Stopped.';
             statusMessage.style.color = 'green';
         });
+
     </script>
 </body>
 </html>
