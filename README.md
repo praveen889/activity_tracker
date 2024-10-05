@@ -25,7 +25,7 @@ pip install Pillow
 6. PyAutoGUI: Used to capture screenshots in the screenshot_manager.py file.
 pip install pyautogui
 
-7. Timezone Management (Optional): If you're using timezone management, ensure the pytz module is installed.
+7. Timezone Management: used for timezone management, ensure the pytz module is installed.
 pip install pytz
 
 
