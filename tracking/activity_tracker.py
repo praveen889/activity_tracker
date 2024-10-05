@@ -70,7 +70,7 @@ class ScreenshotManager:
             time.sleep(300)  
 
     def take_screenshot(self):
-        screenshot_dir = 'screenshots'
+        screenshot_dir = os.path.join('static', 'screenshots')
         os.makedirs(screenshot_dir, exist_ok=True)
         timestamp = int(time.time())
         screenshot_path = os.path.join(screenshot_dir, f'screenshot_{timestamp}.png')
